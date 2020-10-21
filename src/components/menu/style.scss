@@ -1,0 +1,32 @@
+.menu {
+    &_wrap {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    &_content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 0;
+    }
+
+    &_auth {
+        display: flex;
+        justify-content: flex-start;
+        font-size: 16px;
+        color: #333;
+
+        &_signup {
+            margin-left: 8px;
+        }
+    }
+
+    &_logo {
+        width: 206px;
+
+        img {
+            width: 100%;
+        }
+    }
+}

@@ -1,0 +1,22 @@
+.filter {
+    &_wrap {
+        display: flex;
+    }
+
+    &_item {
+        padding: 8px 14px;
+        font-size: 14px;
+
+        & + & {
+            border-left: 1px solid #000;
+        }
+
+        &:first-child {
+            border-left: 1px solid #000;
+        }
+
+        &:last-child {
+            border-right: 1px solid #000;
+        }
+    }
+}
