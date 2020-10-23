@@ -1,0 +1,27 @@
+.post {
+    &_wrap {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    &_content {
+        padding: 15px;
+    }
+
+    &_author {
+        display: flex;
+    }
+
+    &_avatar {
+        width: 61px;
+        height: 61px;
+        border-radius: 30px;
+        overflow: hidden;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+}

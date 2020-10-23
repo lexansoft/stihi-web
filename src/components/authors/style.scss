@@ -1,0 +1,35 @@
+.authors {
+    &_wrap {
+        flex: 1 0 330px;
+        margin-left: 30px;
+    }
+
+    &_content {
+        padding: 15px;
+        border: 1px solid #33a8b9;
+        border-radius: 6px;
+        background-color: #fff;
+    }
+
+    &_item {
+        display: flex;
+        align-items: center;
+    }
+
+    &_avatar {
+        height: 61px;
+        overflow: hidden;
+        border-radius: 30px;
+
+        img {
+            object-fit: cover;
+            width: 61px;
+            height: 61px;
+        }
+    }
+
+    &_nickname {
+        margin-left: 15px;
+        font-size: 13px;
+    }
+}

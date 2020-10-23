@@ -1,0 +1,18 @@
+.lider-week {
+    &_wrap {
+        margin: 22px 0;
+        flex: 1 0 330px;
+        margin-left: 30px;
+    }
+
+    &_content {
+        padding: 15px;
+        border: 1px solid #33a8b9;
+        border-radius: 6px;
+        background-color: #fff;
+    }
+
+    &_avatar {
+        border-radius: 25px;
+    }
+}
