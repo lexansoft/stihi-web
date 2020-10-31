@@ -6,7 +6,8 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "dev": "cross-env NODE_ENV=development webpack-dev-server --open --mode development",
-        "build": "cross-env NODE_ENV=production webpack"
+        "build": "cross-env NODE_ENV=production webpack",
+        "server": "node ./express"
     },
     "repository": {
         "type": "git",
@@ -24,6 +25,7 @@
         "@babel/preset-env": "^7.12.1",
         "@babel/preset-react": "^7.12.1",
         "babel-loader": "^8.1.0",
+        "copy-webpack-plugin": "^6.2.1",
         "cross-env": "^7.0.2",
         "css-loader": "^5.0.0",
         "file-loader": "^6.1.1",
@@ -32,6 +34,8 @@
         "postcss-loader": "^4.0.4",
         "sass": "^1.27.0",
         "sass-loader": "^10.0.3",
+        "static-file-loader": "^0.6.0",
+        "static-files-webpack-plugin": "^0.7.0",
         "style-loader": "^2.0.0",
         "svg-url-loader": "^6.0.0",
         "url-loader": "^4.1.1",
@@ -42,6 +46,8 @@
     "dependencies": {
         "@rematch/core": "^1.4.0",
         "axios": "^0.20.0",
+        "classnames": "^2.2.6",
+        "express": "^4.17.1",
         "moment": "^2.29.1",
         "react": "^17.0.0",
         "react-dom": "^17.0.0",

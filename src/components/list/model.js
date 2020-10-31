@@ -21,11 +21,11 @@ const list = {
         },
     },
     effects: dispatch => ({
-        async fetchAnnounces(payload, state) {
+        async fetchAnnounces(payload) {
             const data = await request.getAnnouncesList(payload);
             dispatch.list.addAnnounces(data.data.list);
         },
-        async fetchArticles(payload, state) {
+        async fetchArticles(payload) {
             const data = await request.getArticlesList(payload);
             dispatch.list.addArticles(data.data.list);
         }

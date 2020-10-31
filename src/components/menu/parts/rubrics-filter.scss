@@ -1,0 +1,10 @@
+.rubrics-filter {
+    margin-left: auto;
+    display: block;
+    border-radius: 3px;
+    height: 31px;
+
+    &:focus {
+        outline: none;
+    }
+}

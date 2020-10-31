@@ -1,7 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-// const StaticFilesWebpackPlugin = require('static-files-webpack-plugin');
-// const CopyPlugin = require('copy-webpack-plugin');
+const StaticFilesWebpackPlugin = require('static-files-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 
@@ -12,8 +12,8 @@ module.exports = {
         "index.js": ['@babel/polyfill', path.resolve(__dirname, "src")]
     },
     output: {
-        path: path.resolve(__dirname, "build/static"),
-        filename: "[name]",
+        path: path.resolve(__dirname, "build"),
+        filename: "static/js/main.js",
         publicPath: isProduction ? './' : '/',
     },
     devServer: {
@@ -23,19 +23,27 @@ module.exports = {
         publicPath: '/',
         contentBase: './src',
     },
-    plugins: isProduction 
+    plugins: isProduction
         ? [
             new HtmlWebpackPlugin({
-                template: path.resolve(__dirname, "src/index.html")
+                template: path.resolve(__dirname, "src/index.html"),
             }),
             new MiniCssExtractPlugin({
-                filename: 'main.css'
-            })
-        ] 
+                filename: 'static/css/main.css'
+            }),
+            new CopyPlugin({
+                patterns: [
+                  { from: 'src/static/images', to: 'static/images' },
+                  { from: 'src/static/fonts', to: 'static/fonts' },
+
+                ],
+              }),
+        ]
         : [
             new HtmlWebpackPlugin({
                 template: path.resolve(__dirname, "src/index.html")
-            })
+            }),
+            new StaticFilesWebpackPlugin()
         ],
     resolve: {
         extensions: [".js", ".json", ".mjs"],

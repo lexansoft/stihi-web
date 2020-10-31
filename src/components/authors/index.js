@@ -17,13 +17,15 @@ const Authors = () => {
                 <div>Авторы приглашают</div>
                 <div>
                     {
-                        authorsInvites.map((el) => (
-                            <div className="authors_item" key={el.id}>
-                                <div className="authors_avatar">
-                                    <img src={el.author.avatar || 'https://stihi.io/frontend_assets_stihi/img/avatar_default.png'} />
+                        authorsInvites.map((el, key) => (
+                            key < 5 
+                            ?   <div className="authors_item" key={el.id}>
+                                    <div className="authors_avatar">
+                                        <img src={el.author.avatar || 'https://stihi.io/frontend_assets_stihi/img/avatar_default.png'} />
+                                    </div>
+                                    <div className="authors_nickname">{el.author.nickname || el.author_name}</div>
                                 </div>
-                                <div className="authors_nickname">{el.author.nickname || el.author_name}</div>
-                            </div>
+                            : null
                         ))
                     }
                 </div>

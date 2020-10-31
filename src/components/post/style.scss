@@ -1,6 +1,6 @@
 .post {
     &_wrap {
-        max-width: 1200px;
+        max-width: 1000px;
         margin: 0 auto;
     }
 
@@ -10,6 +10,8 @@
 
     &_author {
         display: flex;
+        align-items: center;
+        margin: 15px 0;
     }
 
     &_avatar {
@@ -17,11 +19,103 @@
         height: 61px;
         border-radius: 30px;
         overflow: hidden;
+        margin-right: 14px;
 
         img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
+    }
+
+    &_title {
+        font-size: 32px;
+        text-align: left;
+        color: #333;
+        font-weight: 700;
+        padding-bottom: 15px;
+    }
+
+    &_markdown {
+        padding: 15px 0;
+
+        img {
+            width: 100%;
+            padding: 10px 0;
+        }
+
+        b {
+            padding-top: 8px;
+            display: block;
+        }
+
+        iframe {
+            display: block;
+            width: 600px;
+            height: 300px;
+            padding: 15px 0;
+        }
+    }
+
+    &_navigation {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        a {
+            color: #959297;
+            font-size: 12px;
+            position: relative;
+            margin: 5px 0;
+        }
+    }
+
+    &_tags {
+        display: flex;
+        flex-wrap: wrap;
+
+        &_item {
+            margin-right: 6px;
+            border: 1px solid #bebebe;
+            border-radius: 2px;
+            padding: 2px 4px;
+            font-size: 12px;
+            color: #333;
+        }
+    }
+
+    &_user {
+        margin: 15px 0;
+
+        span {
+            font-size: 12px;
+            color: #333;
+        }
+    }
+
+    &_action {
+        background-color: #34a7b9;
+        color: #fff;
+        text-align: center;
+        text-transform: uppercase;
+        padding: 6px 0;
+        border-radius: 3px;
+    }
+
+    &_comments {
+        display: flex;
+        box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
+        margin-bottom: 12px;
+
+        &_end {
+            display: block;
+            border-bottom: 1px solid #333;
+            margin-bottom: 8px;
+        }
+    }
+
+    &_comments + &_comments-wrap {
+        width: calc(100% - 40px);
+        margin-left: auto;
     }
 }

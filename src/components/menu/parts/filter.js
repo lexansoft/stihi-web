@@ -1,13 +1,12 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import { Link, useLocation } from 'react-router-dom';
 
 import RubricsFilter from './rubrics-filter';
 
-import { useLocation } from 'react-router-dom';
-
+import classNames from 'classnames/bind';
 import './filter.scss';
 
-const showFilter = {
+const urlsFilter = {
     new: 'new',
     popular: 'popular',
     actual: 'actual'
@@ -28,21 +27,26 @@ const links = [
     },
     {
         name: 'Комментарии',
-        link: '/posts/comments'
+        link: '/comments'
     }
 ];
 
 const Filter = () => {
     const location = useLocation();
+    const isMainPage = location.pathname.length === 1;
     const urlList = location.pathname.split('/');
-    const category = urlList[urlList ?  urlList.length - 1 : ''];
+    const showFilter = urlList.find((el) => el === urlsFilter[el]);
+    const activePage = (link) => isMainPage ? false : link.indexOf(location.pathname) !== -1;
+
     return (
         <div className="filter_wrap">
             <div className="filter_content">
                 {links.map((el, key) => (
-                    <Link key={`${el.name}-${key}`} to={el.link}><div className="filter_item">{el.name}</div></Link>
+                    <Link className={classNames(activePage(el.link) ? "filter_item_active" : "")} key={`${el.name}-${key}`} to={el.link}>
+                        <div className="filter_item"><div className="filter_item_title">{el.name}</div></div>
+                    </Link>
                 ))}
-                {showFilter[category] ? <RubricsFilter /> : null}
+                {showFilter ? <RubricsFilter /> : null}
             </div>
         </div>
     )
