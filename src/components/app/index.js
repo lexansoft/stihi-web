@@ -1,23 +1,22 @@
 import React from 'react';
+import { Router, Route } from "react-router-dom";
 
 import Menu from 'components/menu';
 import PostList from 'pages/post-list';
 import Post from 'components/post';
 import Main from 'pages/main';
 import CommentList from 'components/comment-list';
-
-import { createBrowserHistory } from 'history';
-import { Router, Route } from "react-router-dom";
+import UserBlog from 'components/user-blog';
+import Modal from 'ui/modal';
 
 import './style.scss';
 
-const history = createBrowserHistory();
-
-const App = () => { 
+const App = ({history}) => {
     return (
         <Router history={history}>
             <div className="app-grid">
                 <Menu />
+                <Modal />
                 <Route path="/item/:id/:rubric/:postId">
                     <Post />
                 </Route>
@@ -32,6 +31,9 @@ const App = () => {
                 </Route>
                 <Route path="/comments">
                     <CommentList />
+                </Route>
+                <Route exact path="/@:login">
+                    <UserBlog />
                 </Route>
                 <Route exact path="/">
                     <Main />

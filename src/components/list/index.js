@@ -1,83 +1,84 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useParams, useLocation } from 'react-router-dom';
 
-import { Link, useParams, useLocation } from 'react-router-dom';
-
-import moment from 'moment';
+import PostsList from './parts/posts-list';
+import Spin from 'ui/spin';
 
 import './style.scss';
 
 const mainType = "main";
-
-const rednderPost = ({data, title = '', location}) => {
-    return (
-        <div className="list_box">
-            <div className="list_box_content">
-                {title ? <div className="list_box_title">{title}</div> : null}
-                {data.map((el) => (
-                    <div className="list_box_item" key={el.id}>
-                        <Link to={`/item/${location}/${el.id}`} className="list_box_item-image">
-                            <img src={el.image} alt="image" />
-                        </Link>
-                        <div className="list_box_item-text">
-                            <Link to={`/item/${location}/${el.id}`} className="list_box_item-title">{el.title}</Link>
-                            <Link to={`/item/${location}/${el.id}`} className="list_box_item-descrition">{el.body}</Link>
-                            <div className="list_box_info">
-                                <div>{el.user.nickname}</div>
-                                <div>{moment(el.time).format('DD/MM/YYYY, HH:mm')}</div>
-                                <div>Нравится {el.votes_count}</div>
-                            </div>
-                        </div>
-                    </div>  
-                ))}
-            </div>
-        </div>
-    )
-};
+const defaultItemsCount = 20;
+const defaultAnnouncesCount = 3;
 
 const List = () => {
     const announces = useSelector((state) => state.list.announces);
     const articles = useSelector((state) => state.list.articles);
+    const pagination = useSelector((state) => state.list.pagination);
     const dispatch = useDispatch();
     const params = useParams();
     const { id, rubric } = params;
     const isMainPage = useLocation().pathname.length === 1;
     const location = !isMainPage ? (id || '') + (rubric ? `/${rubric}` : '') : 'main';
 
-    useEffect(() => {
+    const getAnnounces = (firstRequest = false) => {
+        const defaultCount = isMainPage ? defaultItemsCount : defaultAnnouncesCount;
+        const requestCount = firstRequest ? defaultCount : defaultCount + pagination.announces.itemsCount;
+        
         dispatch.list.fetchAnnounces({
-            count: isMainPage ? 20 : 3,
-            page_code: isMainPage ? mainType : id,
-            type: isMainPage ? mainType : id,
-            tags: rubric ? [rubric] : []
+            params: {
+                count: requestCount,
+                page_code: isMainPage ? mainType : id,
+                type: isMainPage ? mainType : id,
+                tags: rubric ? [rubric] : []
+            },
+            firstRequest
         });
+    };
 
-        if (!isMainPage) {
-            dispatch.list.fetchArticles({
-                count: 20,
+    const getArticles = (firstRequest = false) => {
+        const requestCount = firstRequest ? defaultItemsCount : defaultItemsCount + pagination.articles.itemsCount;
+        
+        dispatch.list.fetchArticles({
+            params: {
+                count: requestCount,
                 type: isMainPage ? mainType : id,
                 rubrics: rubric ? [rubric] : []
-            });
+            },
+            firstRequest
+        });
+    };
+
+    useEffect(() => {
+        getAnnounces(true);  //first request
+
+        if (!isMainPage) {
+            getArticles(true); //first request
         }
     }, [dispatch, id, rubric]);
 
     return (
         <div className="list_wrap">
             {isMainPage 
-                ?   <div className="list_title">Литературный портал на блокчейне, пространство свободной публикации и общения между авторами и читателями.</div> 
+                ?   <div className="list_title">22ч Литературный портал на блокчейне, пространство свободной публикации и общения между авторами и читателями.</div> 
                 :    null}
             {announces.length 
-                ?   rednderPost({ 
-                        data: announces, 
-                        title: 'Анонсы',
-                        location
-                    }) 
-                : null}
-            {articles.length 
-                ?   rednderPost({ 
-                        data: articles,
-                        location
-                    })
+                ?   <PostsList
+                        data={announces} 
+                        title={'Анонсы'}
+                        location={location}
+                        hasMore={pagination.announces.hasMore}
+                        fetch={isMainPage ? getAnnounces : null}
+                        isList={isMainPage}
+                    />
+                :   <Spin />}
+            {!isMainPage && articles.length 
+                ?   <PostsList
+                        data={articles} 
+                        location={location}
+                        fetch={getArticles}
+                        hasMore={pagination.articles.hasMore}
+                    />
                 :   null}
         </div>
     )

@@ -52,6 +52,9 @@ module.exports = {
             api: path.resolve(__dirname, "src/api"),
             static: path.resolve(__dirname, "src/static"),
             pages: path.resolve(__dirname, "src/pages"),
+            ui: path.resolve(__dirname, "src/ui-components"),
+            store: path.resolve(__dirname, "src/store"),
+            utils: path.resolve(__dirname, "src/utils"),
         }
     },
     module: {

@@ -27,7 +27,6 @@ const post = {
 
             payload.forEach((item, index) => {
                 if (item.id === state.content.id) {
-                    console.log({item, index})
                     next = payload[index + 1] ? payload[index + 1].id : '';
                     prev = payload[index - 1] ? payload[index - 1].id : '';
                 }

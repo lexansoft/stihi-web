@@ -26,6 +26,9 @@
         &_signup {
             margin-left: 8px;
         }
+        &_signup, &_signin:hover {
+            cursor: pointer;
+        }
     }
 
     &_logo {

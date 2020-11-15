@@ -45,6 +45,13 @@ const getComments = ({ data, isMain = false }) => {
     ))
 };
 
+const categories = {
+    actual: 'Актуальном',
+    popular: 'Лидерах',
+    new: 'Новом',
+    follow: 'Блоге'
+};
+
 
 const Post = () => {
     const content = useSelector((state) => state.post.content);
@@ -78,13 +85,15 @@ const Post = () => {
         
     }, [dispatch, rubric, id, postId]);
 
+    console.log('CONTENT', content)
+
     return (
         content.id 
             ?   <div className="post_wrap">
                     <div className="post_content">
                         <div className="post_navigation">
-                            {prev ? <Link to={`${location}/${prev}`}>Предыдущий пост</Link> : null}
-                            {next ? <Link to={`${location}/${next}`}>Следующий пост</Link> : null}
+                            {prev ? <Link to={`${location}/${prev}`}>Предыдущий пост в {categories[id]}</Link> : null}
+                            {next ? <Link to={`${location}/${next}`}>Следующий пост в {categories[id]}</Link> : null}
                         </div>
                         <div className="post_author">
                             <div className="post_avatar">
@@ -109,8 +118,12 @@ const Post = () => {
                         </div>
                         <div className="post_action">Спонсировать</div>
                         <div className="post_navigation">
-                            {prev ? <Link to={`${location}/${prev}`}>Предыдущий пост</Link> : null}
-                            {next ? <Link to={`${location}/${next}`}>Следующий пост</Link> : null}
+                            {prev ? <Link to={`${location}/${prev}`}>Предыдущий пост в Блоге Автора</Link> : null}
+                            {next ? <Link to={`${location}/${next}`}>Следующий пост в Блоге Автора</Link> : null}
+                        </div>
+                        <div className="post_navigation">
+                            {prev ? <Link to={`${location}/${prev}`}>Предыдущий пост в {categories[id]}</Link> : null}
+                            {next ? <Link to={`${location}/${next}`}>Следующий пост в {categories[id]}</Link> : null}
                         </div>
                         {content.comments_count && comments
                             ?   <div>
