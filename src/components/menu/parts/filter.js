@@ -16,8 +16,8 @@ const urlsFilter = {
 const authLinks = [
     {
         name: 'Лента',
-        link: '/posts/follow',
-        tag: 'follow'
+        link: '/posts/feed',
+        tag: 'feed'
     }
 ];
 
@@ -44,9 +44,8 @@ const links = [
     }
 ];
 
-const Filter = () => {
-    const isAuth = useSelector((state) => state.auth);
-    console.log(isAuth);
+const Filter = ({ token }) => {
+    const isAuth = token;
     const newLinks = isAuth ? links.concat(authLinks) : links;
     const location = useLocation();
     const isMainPage = location.pathname.length === 1;
@@ -77,6 +76,7 @@ const Filter = () => {
                     </Link>
                 ))}
                 {showFilter() ? <RubricsFilter /> : null}
+                {isAuth ? <button>edit</button> : null}
             </div>
         </div>
     )

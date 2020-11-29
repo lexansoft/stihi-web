@@ -3,26 +3,33 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import Filter from './parts/filter';
-import { getUserId } from 'utils';
+import { getUserId, getAuthToken } from 'utils';
 
 import './style.scss';
 
 const Menu = () => {
+    const token = useSelector((state) => state.auth.token) || getAuthToken();
     const dispatch = useDispatch();
     const openModal = (content) => dispatch.modal.toggle({ show: true, content });
-    const id = getUserId();
     const user = useSelector((state) => state.auth.user);
+    const cashId = token ? getUserId() : '';
+    const id = user.id;
     const battory = useSelector((state) => state.auth.battory);
     const logout = () => {
         dispatch.auth.logout();
     }
+
     useEffect(() => {
-        dispatch.auth.addUserId(id);
-        if (id) {
-            dispatch.auth.fetchUserInfo({ id });
+        if (id || cashId) {
+            if (!id) {
+                dispatch.auth.fetchUserInfo({ id: cashId });
+            } else {
+                dispatch.auth.fetchUserInfo({ id });
+            }
+            dispatch.auth.fetchBattory();
         }
-        dispatch.auth.fetchBattory();
-    }, [dispatch, id])
+    }, [dispatch, id, token]);
+
     return (
         <div className="menu_wrap">
             <div className="menu_content">
@@ -39,12 +46,12 @@ const Menu = () => {
                                 <div>{user.nickname}</div>
                                 <div>{battory}% энергии</div>
                             </div>
-                            <div><img width={80} src={user.avatar || 'static/images/avatar_default.png'} /></div>
+                            <Link to={`/@${user.nickname}`}><img width={80} src={user.avatar || 'static/images/avatar_default.png'} /></Link>
                             <button onClick={logout}>Выйти</button>
                         </div>
                 }
             </div>
-            <Filter />
+            <Filter token={token}/>
         </div>   
     )
 }

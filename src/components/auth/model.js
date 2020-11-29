@@ -3,10 +3,13 @@ import Cookies from 'js-cookie';
 
 const auth = {
     state: {
-        user: {},
+        user: {
+            id: 0,
+            avatar: '',
+            nickname: ''
+        },
         token: '', 
         parsedToken: {},
-        userId: 0,
         battory: 0
     },
     reducers: {
@@ -16,12 +19,6 @@ const auth = {
                 token: payload.token,
                 parsedToken: payload.parsedToken,
                 userId: payload.parsedToken.sub
-            }
-        },
-        addUserId(state, payload) {
-            return {
-                ...state,
-                userId: payload
             }
         },
         addUserInfo(state, payload) {
@@ -41,7 +38,11 @@ const auth = {
             Cookies.remove('parsedToken');
             return {
                 ...state,
-                user: {},
+                user: {
+                    id: 0,
+                    avatar: '',
+                    nickname: ''
+                },
                 token: '', 
                 parsedToken: {},
                 userId: 0,
@@ -58,10 +59,9 @@ const auth = {
                 const base64 = base64Url.replace('-', '+').replace('_', '/');
                 const parsedToken = JSON.parse(window.atob(base64));
 
-                dispatch.auth.addSession({ parsedToken, token });
                 Cookies.set('token', token);
                 Cookies.set('parsedToken', parsedToken);
-
+                dispatch.auth.addSession({ parsedToken, token });
                 dispatch.modal.toggle({ show: false, content: 'none' });
                 state.router.push(`/@${payload.name}`);
             } else {

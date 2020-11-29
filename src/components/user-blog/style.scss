@@ -39,4 +39,43 @@
     &_login {
         color: #fff;
     }
+
+    
+    &_info {
+        width: 330px;
+        border: 1px solid #33a8b9;
+        border-radius: 6px;
+        background-color: #fff;
+
+        & + & {
+            margin-top: 20px;
+        }
+
+        &_content {
+            padding: 15px;
+
+            a {
+                display: block;
+            }
+        }
+    }
+
+    &_layout {
+        display: flex;
+    }
+}
+
+.blog-navigation {
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.3);
+
+    &_content { 
+        padding-left: 330px;
+        display: flex;
+        align-items: center;
+    }
+
+    &_item {
+        padding: 15px;
+        font-size: 12px;
+    }
 }

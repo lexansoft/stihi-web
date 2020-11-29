@@ -8,6 +8,8 @@ import post from 'components/post/model';
 import modal from 'ui/modal/model';
 import auth from 'components/auth/model';
 import newAuthors from 'components/new-authors/model';
+import userBlog from 'components/user-blog/model';
+import comments from 'components/comment-list/model';
 
 export const history = createBrowserHistory();
 
@@ -24,7 +26,9 @@ export const store = init({
         modal,
         auth,
         router,
-        newAuthors  
+        newAuthors,
+        userBlog,
+        comments
     }
 });
 

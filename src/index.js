@@ -14,7 +14,7 @@ function check() {
   }
 };
 
-// check();
+check();
 
 const app = <Provider store={store}>
                 <App history={history} />

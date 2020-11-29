@@ -26,8 +26,8 @@ const PostsList = ({
     data, 
     title = '', 
     location, 
-    fetch = null, 
-    isList = true,
+    fetchMore = null, 
+    scrollFetch = true,
     hasMore
 }) => {
     const list = data.map((el) => (
@@ -43,10 +43,10 @@ const PostsList = ({
             <div className="list_box_content">
                 {title ? <div className="list_box_title">{title}</div> : null}
                 {
-                    isList 
+                    scrollFetch
                         ?   <InfiniteScroll
                                 dataLength={data.length}
-                                next={fetch}
+                                next={fetchMore}
                                 hasMore={hasMore}
                                 loader={<Spin />}
                             >

@@ -32,6 +32,27 @@ const App = ({history}) => {
                 <Route path="/comments">
                     <CommentList />
                 </Route>
+                <Route path="/@:login/wallets">
+                    <UserBlog />
+                </Route>
+                <Route path="/@:login/comments">
+                    <UserBlog />
+                </Route>
+                <Route path="/@:login/subscriptions">
+                    <UserBlog />
+                </Route>
+                <Route path="/@:login/subscribers">
+                    <UserBlog />
+                </Route>
+                <Route path="/@:login/blog/:tags">
+                    <UserBlog />
+                </Route>
+                <Route exact path="/@:login/blog">
+                    <UserBlog />
+                </Route>
+                <Route path="/@:login/settings">
+                    <UserBlog />
+                </Route>
                 <Route exact path="/@:login">
                     <UserBlog />
                 </Route>

@@ -14,7 +14,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, "build"),
         filename: "static/js/main.js",
-        publicPath: isProduction ? './' : '/',
+        publicPath: '/',
     },
     devServer: {
         hot: true,

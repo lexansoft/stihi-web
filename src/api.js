@@ -5,7 +5,15 @@ const api = axios.create({
     baseURL: 'https://stihi.io/api/v2',
     headers: {
         Authorization: "BEARER " + getAuthToken()
-     }
+    }
+});
+
+const apiV1 = axios.create({
+    baseURL: 'https://stihi.io/api/v1',
+    headers: {
+        Authorization: "BEARER " + getAuthToken(),
+        'Access-Control-Allow-Origin': '*',
+    }
 });
 
 const getAnnouncesList = (params = {}) => api.post('/get_announces_list', params);
@@ -28,6 +36,15 @@ const getUserBattery = (params = {}) => api.post('/get_user_battery', params);
 
 const getNewAuthors = (params = {}) => api.post('/get_users_list', params);
 
+const getTagList = (params = {}) => api.post('/get_user_tags_list', params);
+
+const getUserSubscriptionsList = (params = {}) => api.post('/get_user_subscriptions_list', params);
+
+const getUserSubscribersList = (params = {}) => api.post('/get_user_subscribers_list', params);
+
+const subscribeUser = (params = {}) => api.post('/user_subscribe', params);
+
+const getCommentsListAll = (params = {}) => api.post('/get_all_comments_list', params);
 
 
 export default {
@@ -40,7 +57,12 @@ export default {
     postSingin,
     getUserInfo,
     getUserBattery,
-    getNewAuthors
+    getNewAuthors,
+    getTagList,
+    getUserSubscriptionsList,
+    getUserSubscribersList,
+    subscribeUser,
+    getCommentsListAll
 };
 
 // PA0HV3WlQXsh4DVK1JAmZf7pXYbUTxpCaFmXWsNoMU882ygwjrBB

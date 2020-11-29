@@ -18,8 +18,6 @@ const NewAuthors = () => {
         });
     }, [dispatch]);
 
-
-    console.log(newAuthors)
     return (
         <div className="new-authors">
             <div className="new-authors_content">
